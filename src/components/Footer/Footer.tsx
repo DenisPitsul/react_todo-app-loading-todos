@@ -13,46 +13,37 @@ export const Footer: React.FC<Props> = ({
   statusFilter,
   onStatusFilterChange,
 }) => {
+  const getHref = (filter: StatusFilter) => {
+    switch (filter) {
+      case StatusFilter.All:
+        return '#/';
+      case StatusFilter.Active:
+        return '#/active';
+      case StatusFilter.Completed:
+        return '#/completed';
+    }
+  };
+
   return (
     <footer className="todoapp__footer" data-cy="Footer">
       <span className="todo-count" data-cy="TodosCounter">
         {activeTodosCount} items left
       </span>
 
-      {/* Active link should have the 'selected' class */}
       <nav className="filter" data-cy="Filter">
-        <a
-          href="#/"
-          className={cn('filter__link', {
-            selected: statusFilter === StatusFilter.ALL,
-          })}
-          data-cy="FilterLinkAll"
-          onClick={() => onStatusFilterChange(StatusFilter.ALL)}
-        >
-          All
-        </a>
-
-        <a
-          href="#/active"
-          className={cn('filter__link', {
-            selected: statusFilter === StatusFilter.ACTIVE,
-          })}
-          data-cy="FilterLinkActive"
-          onClick={() => onStatusFilterChange(StatusFilter.ACTIVE)}
-        >
-          Active
-        </a>
-
-        <a
-          href="#/completed"
-          className={cn('filter__link', {
-            selected: statusFilter === StatusFilter.COMPLETED,
-          })}
-          data-cy="FilterLinkCompleted"
-          onClick={() => onStatusFilterChange(StatusFilter.COMPLETED)}
-        >
-          Completed
-        </a>
+        {Object.values(StatusFilter).map(filter => (
+          <a
+            key={filter}
+            href={getHref(filter)}
+            className={cn('filter__link', {
+              selected: statusFilter === filter,
+            })}
+            data-cy={`FilterLink${filter}`}
+            onClick={() => onStatusFilterChange(filter)}
+          >
+            {filter[0] + filter.slice(1).toLowerCase()}
+          </a>
+        ))}
       </nav>
 
       {/* this button should be disabled if there are no completed todos */}

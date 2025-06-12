@@ -4,16 +4,16 @@ import { StatusFilter } from '../enums/statusFilter';
 
 export const useTodosFilter = (todos: Todo[]) => {
   const [statusFilter, setStatusFilter] = useState<StatusFilter>(
-    StatusFilter.ALL,
+    StatusFilter.All,
   );
   const [filteredTodos, setFilteredTodos] = useState<Todo[]>(todos);
 
   useEffect(() => {
     switch (statusFilter) {
-      case StatusFilter.ACTIVE:
+      case StatusFilter.Active:
         setFilteredTodos(todos.filter(todo => !todo.completed));
         break;
-      case StatusFilter.COMPLETED:
+      case StatusFilter.Completed:
         setFilteredTodos(todos.filter(todo => todo.completed));
         break;
       default:

@@ -1,5 +1,5 @@
 export enum StatusFilter {
-  ALL = 'all',
-  ACTIVE = 'active',
-  COMPLETED = 'completed',
+  All = 'All',
+  Active = 'Active',
+  Completed = 'Completed',
 }

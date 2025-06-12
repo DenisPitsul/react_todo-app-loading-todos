@@ -19,9 +19,7 @@ export const App: React.FC = () => {
     return <UserWarning />;
   }
 
-  const activeItemsCount = () => {
-    return todos.filter(todo => !todo.completed).length;
-  };
+  const activeItemsCount = todos.filter(todo => !todo.completed).length;
 
   return (
     <div className="todoapp">
@@ -51,7 +49,7 @@ export const App: React.FC = () => {
 
         {todos.length > 0 && (
           <Footer
-            activeTodosCount={activeItemsCount()}
+            activeTodosCount={activeItemsCount}
             statusFilter={statusFilter}
             onStatusFilterChange={setStatusFilter}
           />
