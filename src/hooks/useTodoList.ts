@@ -4,24 +4,24 @@ import { getTodos } from '../api/todos';
 
 export const useTodoList = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isTodosLoading, setIsTodosLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   useEffect(() => {
-    setIsLoading(true);
+    setIsTodosLoading(true);
     getTodos()
       .then(setTodos)
       .catch(() => {
         setErrorMessage('Unable to load todos');
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => setIsTodosLoading(false));
   }, []);
 
   return {
     todos,
     setTodos,
-    isTodosLoading: isLoading,
-    setIsTodosLoading: setIsLoading,
+    isTodosLoading,
+    setIsTodosLoading,
     loadTodosErrorMessage: errorMessage,
     setLoadTodosErrorMessage: setErrorMessage,
   };

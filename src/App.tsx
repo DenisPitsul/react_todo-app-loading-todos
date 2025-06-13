@@ -10,8 +10,12 @@ import { Footer } from './components/Footer';
 import { useTodosFilter } from './hooks/useTodosFilter';
 
 export const App: React.FC = () => {
-  const { todos, loadTodosErrorMessage, setLoadTodosErrorMessage } =
-    useTodoList();
+  const {
+    todos,
+    isTodosLoading,
+    loadTodosErrorMessage,
+    setLoadTodosErrorMessage,
+  } = useTodoList();
   const { statusFilter, setStatusFilter, filteredTodos } =
     useTodosFilter(todos);
 
@@ -45,7 +49,7 @@ export const App: React.FC = () => {
           </form>
         </header>
 
-        <TodoList todos={filteredTodos} />
+        {!isTodosLoading && <TodoList todos={filteredTodos} />}
 
         {todos.length > 0 && (
           <Footer
