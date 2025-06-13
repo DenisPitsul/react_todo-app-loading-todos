@@ -49,14 +49,18 @@ export const App: React.FC = () => {
           </form>
         </header>
 
-        {!isTodosLoading && <TodoList todos={filteredTodos} />}
+        {!isTodosLoading && (
+          <>
+            <TodoList todos={filteredTodos} />
 
-        {todos.length > 0 && (
-          <Footer
-            activeTodosCount={activeItemsCount}
-            statusFilter={statusFilter}
-            onStatusFilterChange={setStatusFilter}
-          />
+            {Boolean(todos.length) && (
+              <Footer
+                activeTodosCount={activeItemsCount}
+                statusFilter={statusFilter}
+                onStatusFilterChange={setStatusFilter}
+              />
+            )}
+          </>
         )}
       </div>
 
